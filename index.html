@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فهرس المواد | إعداد المهندس حمزة رحاحلة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0e1b2c;
+    --bg-deep:#0a1420;
+    --panel:#152841;
+    --panel-2:#1b3350;
+    --card:#17293f;
+    --card-hover:#1e3a58;
+    --gold:#c9a24b;
+    --gold-bright:#e0bc6a;
+    --teal:#4f8fa6;
+    --text:#eee7d8;
+    --text-dim:#94a7bd;
+    --line:#25415f;
+    --shadow: 0 12px 30px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 85% -10%, rgba(201,162,75,.10), transparent 60%),
+      radial-gradient(900px 500px at -10% 10%, rgba(79,143,166,.12), transparent 55%),
+      var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans Arabic','Tajawal',sans-serif;
+    min-height:100vh;
+    scroll-behavior:smooth;
+  }
+  ::selection{background:var(--gold); color:#161616;}
+
+  header{
+    padding:38px 6vw 30px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  header::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(135deg, rgba(201,162,75,.05) 0 2px, transparent 2px 26px);
+    pointer-events:none;
+  }
+  .header-row{
+    display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+    position:relative; z-index:1;
+  }
+  .brand-mark{ display:flex; align-items:center; gap:16px; }
+  .seal{
+    width:58px; height:58px; border-radius:50%;
+    border:2px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Tajawal',sans-serif; font-weight:900; font-size:22px; color:var(--gold-bright);
+    flex-shrink:0;
+    box-shadow: inset 0 0 0 3px rgba(201,162,75,.15);
+  }
+  h1{
+    font-family:'Tajawal',sans-serif; font-weight:900;
+    font-size:clamp(24px,3.4vw,38px);
+    margin:0 0 4px;
+    letter-spacing:.5px;
+  }
+  .tagline{ color:var(--text-dim); font-size:14.5px; margin:0; }
+  .credit{
+    font-family:'Tajawal',sans-serif; font-weight:700; font-size:13.5px;
+    color:var(--gold-bright);
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding:10px 18px; border-radius:999px;
+    white-space:nowrap;
+  }
+  .credit span{color:var(--text-dim); font-weight:400; margin-left:6px;}
+
+  .stats-row{
+    display:flex; gap:28px; margin-top:22px; flex-wrap:wrap; position:relative; z-index:1;
+  }
+  .stat{ font-size:13px; color:var(--text-dim); }
+  .stat b{ color:var(--gold-bright); font-size:17px; font-family:'Tajawal',sans-serif; display:block; }
+
+  .search-wrap{ padding:26px 6vw 6px; }
+  .search-box{
+    max-width:520px;
+    display:flex; align-items:center; gap:10px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:12px 16px;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .search-box:focus-within{
+    border-color:var(--gold);
+    box-shadow:0 0 0 3px rgba(201,162,75,.12);
+  }
+  .search-box svg{ flex-shrink:0; opacity:.6; }
+  .search-box input{
+    background:transparent; border:none; outline:none; color:var(--text);
+    font-family:inherit; font-size:15px; width:100%;
+  }
+  .search-box input::placeholder{ color:var(--text-dim); }
+
+  main{ padding:22px 6vw 80px; }
+  .grid-title{
+    font-family:'Tajawal',sans-serif; font-weight:700; font-size:15px;
+    color:var(--text-dim); margin:18px 0 14px; display:flex; align-items:center; gap:10px;
+  }
+  .grid-title::after{ content:""; height:1px; flex:1; background:var(--line); }
+
+  #grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(210px,1fr));
+    gap:14px;
+  }
+  .subject-card{
+    background:linear-gradient(160deg, var(--card), var(--panel));
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 16px 14px;
+    cursor:pointer;
+    text-align:right;
+    position:relative;
+    transition:transform .15s ease, border-color .15s ease, background .15s ease;
+    display:flex; flex-direction:column; gap:10px; min-height:96px;
+  }
+  .subject-card:hover{
+    transform:translateY(-3px);
+    border-color:var(--gold);
+    background:linear-gradient(160deg, var(--card-hover), var(--panel-2));
+  }
+  .subject-card.active{
+    border-color:var(--gold-bright);
+    box-shadow:0 0 0 2px rgba(201,162,75,.25);
+  }
+  .subject-card .name{ font-family:'Tajawal',sans-serif; font-weight:700; font-size:15.5px; line-height:1.4; }
+  .subject-card .meta{ font-size:12px; color:var(--text-dim); display:flex; align-items:center; gap:6px; }
+  .subject-card .meta .dot{ width:5px; height:5px; border-radius:50%; background:var(--gold); }
+  .no-results{ color:var(--text-dim); padding:30px 4px; font-size:14px; }
+
+  #detail-wrap{ margin-top:34px; display:none; }
+  #detail-wrap.show{ display:block; animation:slideIn .28s ease; }
+  @keyframes slideIn{ from{ opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+  .detail-panel{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:28px 30px 30px;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+  }
+  .detail-panel::before{
+    content:"";
+    position:absolute; top:0; right:0; width:220px; height:220px;
+    background:radial-gradient(circle, rgba(201,162,75,.10), transparent 70%);
+    pointer-events:none;
+  }
+  .detail-head{
+    display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
+    border-bottom:1px solid var(--line); padding-bottom:16px; margin-bottom:20px;
+  }
+  .detail-head h2{
+    font-family:'Tajawal',sans-serif; font-weight:900; font-size:23px; margin:0;
+    color:var(--gold-bright);
+  }
+  .close-btn{
+    background:var(--card); border:1px solid var(--line); color:var(--text-dim);
+    width:34px; height:34px; border-radius:10px; cursor:pointer; font-size:16px;
+    display:flex; align-items:center; justify-content:center; transition:.15s;
+  }
+  .close-btn:hover{ color:var(--text); border-color:var(--gold); }
+
+  .link-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+    gap:12px;
+  }
+  .link-card{
+    display:flex; align-items:center; gap:12px;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:13px 14px;
+    text-decoration:none;
+    color:var(--text);
+    transition:transform .12s ease, border-color .12s ease, background .12s ease;
+  }
+  .link-card:hover{
+    transform:translateX(-3px);
+    border-color:var(--teal);
+    background:var(--card-hover);
+  }
+  .link-icon{
+    width:38px; height:38px; border-radius:10px; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    background:rgba(201,162,75,.12);
+    color:var(--gold-bright);
+  }
+  .link-icon svg{ width:19px; height:19px; }
+  .link-text{ overflow:hidden; }
+  .link-label{ font-size:14px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .link-host{ font-size:11px; color:var(--text-dim); margin-top:2px; }
+
+  footer{
+    text-align:center; padding:30px; color:var(--text-dim); font-size:12.5px;
+    border-top:1px solid var(--line);
+  }
+  footer b{ color:var(--gold-bright); }
+
+  @media(max-width:640px){
+    .detail-panel{ padding:20px 16px 24px; }
+    header{ padding:28px 5vw 24px; }
+    main{ padding:18px 5vw 60px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-row">
+    <div class="brand-mark">
+      <div class="seal">ح ر</div>
+      <div>
+        <h1>فهرس المواد التعليمي</h1>
+        <p class="tagline">كل شروحات ومحتوى واسئلة السنوات السابقة، مرتبة حسب المادة</p>
+      </div>
+    </div>
+    <div class="credit">إعداد <span>المهندس حمزة رحاحلة</span></div>
+  </div>
+  <div class="stats-row">
+    <div class="stat"><b id="stat-subjects">0</b>مادة</div>
+    <div class="stat"><b id="stat-links">0</b>رابط ومصدر</div>
+  </div>
+</header>
+
+<div class="search-wrap">
+  <div class="search-box">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="search" type="text" placeholder="ابحث عن اسم المادة...">
+  </div>
+</div>
+
+<main>
+  <div class="grid-title">خطة النظم</div>
+  <div class="link-grid" style="margin-bottom:26px;">
+    <a class="link-card" href="https://drive.google.com/file/d/1C90l_BE8IKDS_9nzWMJtnUmXY3zEJ5g5/view?usp=drivesdk" target="_blank" rel="noopener">
+      <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg></div>
+      <div class="link-text">
+        <div class="link-label">خطة النظم</div>
+        <div class="link-host">drive.google.com</div>
+      </div>
+    </a>
+  </div>
+
+  <div class="grid-title">كل المواد — اكبس على أي مادة لعرض روابطها</div>
+  <div id="grid"></div>
+
+  <div id="detail-wrap">
+    <div class="detail-panel">
+      <div class="detail-head">
+        <h2 id="detail-title"></h2>
+        <button class="close-btn" onclick="closeDetail()">✕</button>
+      </div>
+      <div class="link-grid" id="detail-links"></div>
+    </div>
+  </div>
+</main>
+
+<footer>هذا الموقع تجميع لمصادر طلابية متفرقة (يوتيوب، درايف، تيليجرام) لتسهيل المراجعة — إعداد <b>المهندس حمزة رحاحلة</b></footer>
+
+<script>
+const SUBJECTS = [
+{name:"كالك 1", links:[
+  {label:"شرح", url:"https://youtube.com/playlist?list=PLgiY5Q-K5uZgqFYJksPQ9nmdu6DdaKbPw&si=Tq07ai7NtRusdGPB"},
+  {label:"سنوات", url:"https://drive.google.com/drive/folders/15zUs-sI00tf7cFXlvaLwVRyCWp30skL6"},
+]},
+{name:"فيزياء 1", links:[
+  {label:"شرح", url:"https://youtube.com/playlist?list=PLgiY5Q-K5uZgqFYJksPQ9nmdu6DdaKbPw&si=Tq07ai7NtRusdGPB"},
+  {label:"سنوات", url:"https://drive.google.com/drive/folders/15zUs-sI00tf7cFXlvaLwVRyCWp30skL6"},
+  {label:"شرح المهندس أحمد عوض (pdf)", url:"https://drive.google.com/drive/folders/1EZ59MqkVqQlUWeeD3N7vgkmqimN41JiU"},
+  {label:"شرح المهندس أحمد الخطيب", url:"https://youtube.com/playlist?list=PL609qs2bCoOKhaKSUHK6bH1oIvjP0fuJN&si=rrtTZsOcP-haJWpZ"},
+  {label:"سنوات", url:"https://t.me/+92zLwTMJ9U1lNDY0"},
+]},
+{name:"لاب فيزياء 105", links:[
+  {label:"شرح ومصادر", url:"https://t.me/+JNOf2Yx6n1sxZDI0"},
+]},
+{name:"لاب فيزياء 106", links:[
+  {label:"شرح ومصادر", url:"https://m.me/j/AbZoAg0vadxZofmF/"},
+]},
+{name:"فيزياء 102", links:[
+  {label:"شرح", url:"https://youtube.com/playlist?list=PL609qs2bCoOL9aSR78N9995nRDHqGFIUY&si=Q43x1sqxyFj9ULdm"},
+  {label:"سنوات", url:"https://t.me/+mH1cRONwJwg1Yzk0"},
+]},
+{name:"الرسم الهندسي", links:[
+  {label:"شرح", url:"https://t.me/+FvIVWSrrXykwNDBk"},
+  {label:"قناة م. صالح المختار", url:"https://mokhtar683.blogspot.com/2022/12/httpst.html"},
+  {label:"سنوات", url:"https://drive.google.com/drive/folders/1JrZb_0OJUHi-HEM_0fKwu7J8nil77JKI"},
+  {label:"شرح يوتيوب مهم لرسمات 2D", url:"https://youtu.be/B3UozAoME-M?si=y1iZxkdIDtmZIw_a"},
+  {label:"شرح يوتيوب — م. سيرين جبرين", url:"https://youtube.com/@engserenejibreen?si=ckOJA9sblPh7uprF"},
+]},
+{name:"مشاغل هندسية", links:[
+  {label:"مصادر المادة 1", url:"https://drive.google.com/drive/folders/0B5DycLwOYrxTZ0lXWmx4a3FwVkU?resourcekey=0-riNucjSrzwjtI5dd0QqtpA"},
+  {label:"مصادر المادة 2", url:"https://drive.google.com/drive/folders/1tqfL9AGbWmLpxk3I4IOMd4kvq7WMQbLS"},
+]},
+{name:"سيركت 1", links:[
+  {label:"شرح", url:"https://youtube.com/playlist?list=PLJwCQtAhsso_vLmqT9lV1VGCHDAKsK1CS&si=v6utNMRrKEuAlaeD"},
+  {label:"سنوات", url:"https://t.me/+_S2LdHqzVOc3NDhk"},
+]},
+{name:"سيركت 2", links:[
+  {label:"شرح", url:"https://youtube.com/playlist?list=PL-gzjh8SfPLfSgafAtB8jGN9DsFk2RsPT&si=UtRpWClbJ2F1bwlr"},
+  {label:"شروحات إضافية", url:"https://drive.google.com/drive/folders/1Gz32qP6ZGOdhttC24AMsXYV1AqEv93RO?usp=drive_link"},
+  {label:"سنوات 1", url:"https://drive.google.com/drive/folders/1r9KaMrpRPpUOhmZR1JYgsg8xPK6RKpuJ"},
+  {label:"سنوات 2", url:"https://drive.google.com/drive/folders/10NrHakFsw01TdPQYLL0RB_hvPlXWUSh5"},
+]},
+{name:"نظم التحكم الآلي", links:[
+  {label:"شرح (pdf)", url:"https://drive.google.com/file/d/1cLTWaZlK1F7deiUfDNQ5IMK2RKC3U1Cz/view?usp=drivesdk"},
+  {label:"شرح وسنوات", url:"https://t.me/+qEgAfP8v53YwNThk"},
+  {label:"سنوات (ورقي)", url:"https://drive.google.com/file/d/1Vw9GmivDH8AWDaI671jggDXluLADKl_R/view?usp=drivesdk"},
+]},
+{name:"مختبر دوائر كهربائية", links:[
+  {label:"شرح pdf وسنوات", url:"https://drive.google.com/drive/folders/0B5DycLwOYrxTTGxubUhqUV9yVjg?resourcekey=0-qXh-eqR1wWvZgZpVuDgqyA"},
+  {label:"شرح", url:"https://drive.google.com/drive/folders/1sOFRwzdzMEoV9E19X65G9C9i8eXJwAOW"},
+]},
+{name:"الآلات الكهربائية", links:[
+  {label:"شرح 1", url:"https://drive.google.com/drive/folders/1HB0kJ5wBpcbGcjo0ubS1ln_i0jj_3oNR"},
+  {label:"شرح 2", url:"https://drive.google.com/drive/folders/18Bc66_56qQqINu5zFpJc9TUZtCw_njxf"},
+  {label:"سنوات 1", url:"https://drive.google.com/drive/folders/0B5DycLwOYrxTMFhXbTlrWEJQbzA?resourcekey=0-t3BPZLMzyuImaJIUa51b_A"},
+  {label:"سنوات 2", url:"https://drive.google.com/drive/folders/0B5DycLwOYrxTdzNqeWZDWXdPVGM?resourcekey=0-SrsXocWvckDdAc6ag2kWHw"},
+]},
+{name:"مفاهيم التصوير الطبي", links:[
+  {label:"شرح", url:"https://drive.google.com/drive/folders/1Sfx6ht8TgBolzGrzQuD_wL0JJmtWFy39"},
+  {label:"نوت م. عفاف الجمل", url:"https://drive.google.com/drive/u/0/folders/1SpWHINJA1KajrXCcTRs9n6JYfRmJG2eR"},
+  {label:"سنوات", url:"https://drive.google.com/file/d/1MR6FO1Y0CFEkLY7LvgsaVUV6pSi_U3Vd/view"},
+  {label:"قوانين شابتر 2", url:"https://drive.google.com/file/d/12WdIXBQoEqNt6GFpXKwIRW7GY6XLccV5/view?usp=drivesdk"},
+  {label:"قوانين شابتر 3", url:"https://drive.google.com/file/d/16O1usi52LJwkU_vW2xjVTyPx3fNzyUSc/view?usp=drivesdk"},
+  {label:"قوانين شابتر 4", url:"https://drive.google.com/file/d/15ik48sZRwUt4CTozf1LBmQCKkvcrFsr2/view?usp=drivesdk"},
+]},
+{name:"أجهزة التصوير الطبي", links:[
+  {label:"نوتات", url:"https://drive.google.com/drive/mobile/folders/0Byss6DRLRCr_RDdtZEtPT3pVUUk/1GNdMl4bn6V1C2m3mLwCXA8jpSfpeiUIW?sort=13&direction=a"},
+]},
+{name:"تحليل وسيط", links:[
+  {label:"شرح", url:"https://drive.google.com/drive/folders/16s27PEaWqHab2c7pMkSxOdj3rELLle2s"},
+  {label:"سنوات 1", url:"https://drive.google.com/file/d/13wSBZTxpfhazDOBhG19973GSWylItaat/view?usp=drivesdk"},
+  {label:"سنوات 2", url:"https://t.me/+ycqK7CB8V_1jMmVk"},
+]},
+{name:"كالك 2", links:[
+  {label:"شرح", url:"https://youtube.com/playlist?list=PLgiY5Q-K5uZhdpJWj67NFXXoiHbCVrz7Q&si=n8Ev7WWbeYNLnKTl"},
+  {label:"سنوات", url:"https://drive.google.com/drive/folders/19ru6NhnC8hWibOaf1mUDm-c8awl3FyE7"},
+  {label:"سنوات (ورقي)", url:"https://drive.google.com/file/d/1G06SVcef2rwc26b9gAb3dBjPFWS0GyqB/view?usp=drivesdk"},
+  {label:"سنوات إضافية", url:"https://t.me/+xEjKD6B-YAFhOWVk"},
+  {label:"شابتر 7", url:"https://drive.google.com/file/d/1T6JGPzOQOvVeQJ93lfb_2Hnv95nZ7VtX/view?usp=drivesdk"},
+  {label:"شابتر 12", url:"https://drive.google.com/file/d/1uziYxfNIR1gep9pznBIEGtq-5EuqFTc7/view?usp=drivesdk"},
+  {label:"شابتر 11", url:"https://drive.google.com/file/d/1IsMaYaFu_nO9WlzVtPJB32rWDcXVLP7r/view?usp=drivesdk"},
+  {label:"شابتر (8.4, 8.5, 8.6)", url:"https://drive.google.com/file/d/1Sam5WloBn1oCvkaF8zKp8bnA0VO4PvU2/view?usp=drivesdk"},
+  {label:"شابتر (8.2, 8.3)", url:"https://drive.google.com/file/d/1dKBzPTrpcStYgzZ75hIea2ko87_ZxR_6/view?usp=drivesdk"},
+]},
+{name:"ديف (Data / DEV)", links:[
+  {label:"شرح", url:"https://youtube.com/playlist?list=PLB0sVyUePtnjVJmCJC5Pg97e6oQZFbULQ&si=90wqHmaFNXedhats"},
+  {label:"سنوات 1", url:"https://drive.google.com/drive/folders/1-N_Ct1FEcb3bvwK4O9UlufKylHQYfEXo"},
+  {label:"سنوات 2", url:"https://t.me/+cyWBLd6W3X0zMTg0"},
+]},
+{name:"مجسات طبية", links:[
+  {label:"د. بهاء الشيخ — شرح Ch 1", url:"https://drive.google.com/file/d/1-NGXT8PQl-3n4edOsrSlxUh3wXscFXaj/view?usp=drivesdk"},
+  {label:"د. بهاء الشيخ — شرح Ch 2", url:"https://drive.google.com/file/d/1-V4qhL_NcLWl1P20qDPV6YNVzcjXriU4/view?usp=drivesdk"},
+  {label:"د. بهاء الشيخ — شرح Ch 3", url:"https://drive.google.com/file/d/1-WqaWF4A2c4IyuLJnkMo3dBjbhZ7hhVa/view?usp=drivesdk"},
+  {label:"د. بهاء الشيخ — شرح Ch 4, 5", url:"https://drive.google.com/file/d/1-XVltmSDPoZ7KGgiKj9c1hHoNETVoqsv/view?usp=drivesdk"},
+  {label:"امتحان ميد وكويزات الفصل الماضي", url:"https://drive.google.com/drive/folders/10-x_RMIQ-6biIyVq0Ecs9oSEHH2qGw5z"},
+  {label:"نوتات أول 3 شباتر", url:"https://drive.google.com/file/d/1bDXd6xOM5HWFx03Jlg3JCFXo9EBVJYhf/view?usp=drivesdk"},
+  {label:"شرح إضافي", url:"https://t.me/+roqKqytphDk3ODY0"},
+  {label:"سنوات — د. بهاء الشيخ", url:"https://drive.google.com/drive/folders/18PgS-yPtmgHgrhgCSp7Pc_2jjIqQfLs6"},
+]},
+{name:"القياسات الطبية", links:[
+  {label:"كتاب المادة", url:"https://drive.google.com/file/d/0B0rGwzsH6LAnUVhVak1xLVVxR28/view?usp=drivesdk"},
+  {label:"نوت الفيرست", url:"https://drive.google.com/folderview?id=0B0rGwzsH6LAnNXg1R2lRQTd5Zk0"},
+  {label:"نوت السكند", url:"https://drive.google.com/folderview?id=0B0rGwzsH6LAnZWtiQzhCeWxhb1E"},
+  {label:"نوت الفاينل", url:"https://drive.google.com/folderview?id=0B0rGwzsH6LAnak5vWGh1cXlNQ28"},
+  {label:"د. بهاء الشيخ — Ch 1", url:"https://drive.google.com/file/d/10O9_c-tyTPwys8FfO2QjoJKtr1kirLbk/view?usp=drivesdk"},
+  {label:"د. بهاء الشيخ — Ch 3", url:"https://drive.google.com/file/d/10ONxr02ymo5jWOPxpavhRX4JqJpgKc7Z/view?usp=drivesdk"},
+  {label:"د. بهاء الشيخ — Ch 4", url:"https://drive.google.com/file/d/1Nm3A0WVyNohKVQnz4nTcjYhZs-M9y8FE/view?usp=drivesdk"},
+  {label:"د. بهاء الشيخ — Ch 6", url:"https://drive.google.com/file/d/17PeIJdLmbYipMmgqTkg9gt4prP1dqU2w/view?usp=drivesdk"},
+  {label:"د. بهاء الشيخ — Ch 6 (تكملة)", url:"https://drive.google.com/file/d/1fMPrDgQ9DnSlfWD3Zl87fLFg6ajxiqzs/view?usp=drivesdk"},
+  {label:"د. بهاء الشيخ — Ch 7", url:"https://drive.google.com/file/d/12V1410AurTitkCRNQz2tDs7FGLfFpx3d/view?usp=drivesdk"},
+  {label:"Physiological Effects of Electricity", url:"https://drive.google.com/file/d/12RtjAMdmx_8l5cHueMyntaHP-CvkrvHs/view?usp=drivesdk"},
+]},
+{name:"أجهزة طبية", links:[
+  {label:"كل ما يخص المادة", url:"https://drive.google.com/drive/folders/1JThLJP9J3OU_GNrCm-PBL_XQZWZ9K4UD?usp=drive_link"},
+  {label:"ركيوردات د. بهاء", url:"https://t.me/+V3nRW3BS-xs1YTg0"},
+]},
+{name:"إلكترو طبية", links:[
+  {label:"كتاب المادة", url:"https://drive.google.com/file/d/1oMUqmkRp6-qkjH5FsO8P30EWbuvV4neI/view"},
+  {label:"شرح — قناة يوتيوب", url:"https://youtube.com/@pulseteam6788?si=IcBzmuG5h-e0zo3C"},
+  {label:"ميد — نوتات وقوانين", url:"https://drive.google.com/file/d/11buSy2VYKkqvqCXA20rWdZCtyYlA0EZk/view?usp=drivesdk"},
+  {label:"فاينل — نوتات وقوانين", url:"https://drive.google.com/file/d/1nUa2ZtCpRkYckzU2gwLNuhRgdnO4VsZV/view?usp=drivesdk"},
+  {label:"دوسيه ميد", url:"https://drive.google.com/file/d/1pcJlu9LJ9YAHuViI-v_SXUGzXKY5j5pN/view?usp=drivesdk"},
+  {label:"دوسيه فاينل", url:"https://drive.google.com/file/d/1a4giRFoREzAqg1XAajVV8q1Dn6NL97gQ/view?usp=drivesdk"},
+  {label:"ميد (ورقي)", url:"https://drive.google.com/file/d/13p6frDM8d6HaN5yFn3mtYf-1G_Nk5KpQ/view?usp=drivesdk"},
+  {label:"فاينل إلكترو طبية", url:"https://drive.google.com/file/d/1Rk4ac5M00fu-xIXjhBLGy5yG-_h1Ptlt/view?usp=drivesdk"},
+]},
+{name:"مختبر أجهزة طبية", links:[
+  {label:"دوسيه المادة", url:"https://drive.google.com/file/d/0B0rGwzsH6LAnM3FJQjVrd1VhTXM/view"},
+]},
+{name:"لاب كيمياء", links:[
+  {label:"شرح وسنوات", url:"https://drive.google.com/drive/folders/16F7qPlWVCdM3Vm8jERjywYSKIWL-QJaY"},
+  {label:"شرح التاسكات (pdf)", url:"https://drive.google.com/drive/mobile/folders/1-ArNoi67aK_HgQz4ZprWaG642OJMSz7v"},
+  {label:"سنوات", url:"https://t.me/chem105Yu"},
+]},
+{name:"كيمياء", links:[
+  {label:"شرح فارس العتوم", url:"https://youtube.com/playlist?list=PLErW-FRepxDL0RMe1gAnCD17RKO0JEhRY"},
+  {label:"شرح يحيى غرايبة", url:"https://youtube.com/playlist?list=PLLJyQ7LC1Da8MkD7hDXeYYBMWZm8ddXQ1"},
+  {label:"سنوات", url:"https://drive.google.com/drive/folders/1fWS6ymeDVUPrpyLEJLteyGMDawkRvKsY"},
+  {label:"سنوات (إضافية)", url:"https://drive.google.com/drive/folders/12ZRk3VKTTJw_RAadLCHhPKsjtZ4x1HKD"},
+  {label:"دوسيه إبراهيم العبادي", url:"https://drive.google.com/file/d/1zz4B0eg4JVHQsBrmBnWkiOCB003XUCoR/view?usp=drivesdk"},
+]},
+{name:"إلكترو 1", links:[
+  {label:"كتاب المادة", url:"https://drive.google.com/file/d/1g2e4739yLcYjKU_NuDCR1CC9nk4mDkev/view?usp=drivesdk"},
+  {label:"شرح الفايق وسنوات", url:"https://drive.google.com/drive/folders/1J7TEMcOe7vjn6J3p1Tv9vYGNea_634Zb"},
+  {label:"شرح محمد العايد", url:"https://youtube.com/playlist?list=PLkXK5Ys6YkPJeYfEHo8Rei1dToH6hB5e1&si=AXOKbDPCkGn9-o44"},
+  {label:"سنوات", url:"https://t.me/+iYzWrtWYYWRlM2Rk"},
+  {label:"سنوات (ورقي)", url:"https://drive.google.com/file/d/1glpBEI0uensxvsmAHOIPKWpvRQYGyy2k/view?usp=drivesdk"},
+  {label:"تكملة الملحق 1", url:"https://drive.google.com/file/d/1c-TADaXaVVRqVqvk94-IlpRp-2V9dyVU/view?usp=drivesdk"},
+  {label:"تكملة الملحق 2", url:"https://drive.google.com/file/d/19FbuHG_M-wRm3xpqjxlG7c2_IdEq5Bby/view?usp=drivesdk"},
+]},
+{name:"بيوميكانيك", links:[
+  {label:"شرح المادة", url:"https://drive.google.com/drive/mobile/folders/1NA82th9YlXPcwFVD7osZ9uLDHL9UUuXn?usp=share_link"},
+  {label:"سنوات — ميد", url:"https://drive.google.com/drive/mobile/folders/1v7xVGOCHaGX60ADUTA9OHlzJ2Pz0w4cs?usp=drive_link"},
+  {label:"سنوات — فاينل", url:"https://drive.google.com/file/d/1QPkk2S6DRumtI6lSAf8s9zhM71V2dXBe/view"},
+  {label:"ميد مهم", url:"https://drive.google.com/file/d/1aOvhRYGA2fpeen3_ow21r-JmFd5FOq2t/view?usp=drivesdk"},
+]},
+{name:"المواد الحيوية BME 472 (د. عاتكة)", links:[
+  {label:"Part 1", url:"https://drive.google.com/file/d/19LCy4wLsfwAwepaxsIiaES5tbpKBRdxV/view?usp=drivesdk"},
+  {label:"Part 2", url:"https://drive.google.com/file/d/1iVp509dgKyc5ov04aGGU_f4o9O6qnSIF/view?usp=drivesdk"},
+  {label:"Part 3", url:"https://drive.google.com/file/d/14vZ_B_ZzFHVWQkAkxOStmDXcq2XFaSDb/view?usp=drivesdk"},
+  {label:"Part 4", url:"https://drive.google.com/file/d/14wmWXv_cARnNamVRf9ekcx_LtkGi_D51/view?usp=drivesdk"},
+  {label:"Part 5", url:"https://drive.google.com/file/d/1Wp_NO2Km_Zd-2ol9cDVJQ_vd1P2NiWro/view?usp=drivesdk"},
+  {label:"Part 6", url:"https://drive.google.com/file/d/1vMm05IMnsmRhfPZZ5l4BfmWvOaFbDku0/view?usp=drivesdk"},
+  {label:"Part 7", url:"https://drive.google.com/file/d/1GtzNaDIR5ddl1LUtK_bHkPw7gLvfJa7Q/view?usp=drivesdk"},
+  {label:"Part 8", url:"https://drive.google.com/file/d/1e3uhwSZSvuNlwZ96igcWS8d9AE9XBx05/view?usp=drivesdk"},
+  {label:"Part 9", url:"https://drive.google.com/file/d/1UJFPD_vkyTygIS2jUSFJh4HTXhHopQM_/view?usp=drivesdk"},
+  {label:"Part 10", url:"https://drive.google.com/file/d/1FFCiZMyuH7vDC8H5D2Y_6SoA3XFuB8V6/view?usp=drivesdk"},
+]},
+{name:"مختبر إلكترونيات", links:[
+  {label:"شرح (pdf)", url:"https://drive.google.com/file/d/1xdHQrg5ANLMtc0M1z7BOzYZpdhIqoHJs/view?usp=drivesdk"},
+  {label:"شرح أول خمس تجارب", url:"https://drive.google.com/file/d/1uEz8OET-g_6OTgGqOx9w5Tzk_ffquqsJ/view?usp=drivesdk"},
+  {label:"سنوات", url:"https://drive.google.com/drive/folders/1--vs3LF-Oev8vrr0hId6Xn5epgVtRjkY"},
+  {label:"كل ما يخص المادة — م. عمر العتوم", url:"https://drive.google.com/drive/folders/0B5DycLwOYrxTeUEwRVJkSERMTUU?resourcekey=0-inDInJTWLAak6OYreFGZEw"},
+  {label:"شرح ريما الحجاوي", url:"https://drive.google.com/drive/folders/1wspaa-wSOnTvzGWcKRa25hSbBj0TgXH9"},
+]},
+{name:"لاب إلكترو طبية", links:[
+  {label:"التجارب", url:"https://drive.google.com/open?id=0Byss6DRLRCr_Rm9QcWY0RWlFVFU"},
+  {label:"كل ما يخص المادة — م. ياسر", url:"https://drive.google.com/drive/folders/1PRRLz5VTpXWze_W71tJaMlM4irXI7hDx?usp=drive_link"},
+]},
+{name:"مختبر قياسات", links:[
+  {label:"حلول التجارب", url:"https://drive.google.com/drive/u/0/mobile/folders/1EXeALP_wwULppastZJ8-IeQECUx2Vtlp?usp=sharing"},
+  {label:"سنوات (ورقي)", url:"https://drive.google.com/file/d/1XpntZH5I--8t3wuJW700MfoMyy_QQMJh/view?usp=drivesdk"},
+]},
+{name:"قياسات طبية", links:[
+  {label:"شرح د. عوض (pdf)", url:"https://drive.google.com/drive/folders/1iBkF5Lg5_ML8r2PQInpkOWMpffgzi_Qr?usp=drive_link"},
+  {label:"سنوات", url:"https://drive.google.com/drive/folders/109v3ndInTJ9hjKPH9_A8aD8ay0IwrVuy"},
+  {label:"كويزات", url:"https://drive.google.com/file/d/1GsnkLoPvezLDxXNfefGdgpjs41LxYaSh/view?usp=drivesdk"},
+  {label:"شابتر 3", url:"https://drive.google.com/file/d/1uK1P8WXl_LHyX_1WYoMP3eZjvHzBCh1p/view?usp=drivesdk"},
+  {label:"شابتر 4", url:"https://drive.google.com/file/d/1m6yW47bLIWdYEexhuo2O20aPbdUcFcB6/view?usp=drivesdk"},
+  {label:"شابتر 6", url:"https://drive.google.com/file/d/18Uw8-CNxPYINL2r4WqAgaRdRoxVfJM3z/view?usp=drivesdk"},
+  {label:"ميد د. قاسم", url:"https://drive.google.com/file/d/1q3mA3U9My18jZ4hY4AFBzrXkmtXn2J56/view?usp=drivesdk"},
+]},
+{name:"لاب صيانة", links:[
+  {label:"مصادر المادة", url:"https://drive.google.com/drive/folders/1GG2ZylAfz4VgoJGmbZLA0YAtKorZjF1w?usp=drive_link"},
+]},
+{name:"ميكانيكا الموائع", links:[
+  {label:"كتاب المادة", url:"https://drive.google.com/file/d/1yaEp3LS8wwNuUc-QQt7S-VDEGjfbeHjU/view?usp=drivesdk"},
+  {label:"شرح", url:"https://drive.google.com/drive/folders/1lxq2wBaGWpD0cRWCeeC9YQAniSvzeCdu?usp=drive_link"},
+  {label:"قوانين أول 3 شباتر", url:"https://drive.google.com/file/d/1ngSBdsBy-Bsi07LcQiNIRhuSCJGWq620/view?usp=drivesdk"},
+  {label:"قوانين شابتر 4, 5, 6, 8", url:"https://drive.google.com/file/d/1hOWJomEqClbVOXwLVgjK5UoMMcWfFnB_/view?usp=drivesdk"},
+]},
+{name:"ظاهرة الانتقال الطبي", links:[
+  {label:"شرح (pdf) واسئلة سنوات", url:"https://drive.google.com/drive/folders/1Ky3MFtW9MImqz-tmd1svx_XampfRb1eD?usp=drive_link"},
+]},
+{name:"التحليلات العددية في الهندسة", links:[
+  {label:"محاضرات مسجلة — د. علا", url:"https://drive.google.com/drive/folders/1yHUuOXMERkiin2WM_Jttu87XnmDrt9Ys"},
+  {label:"فيديوهات د. أمين", url:"https://youtube.com/@dr.amint.yousefalqudah6976"},
+  {label:"شرح — يوتيوب", url:"https://youtube.com/playlist?list=PLhLuqSrz1I0VllaE5ehDU5K95DOEOUJxw"},
+  {label:"دوسيه م. هشام", url:"https://drive.google.com/drive/folders/1EahsFYg1ZWdmpLpo9dvoIEaoMOYKvk8u"},
+  {label:"سنوات", url:"https://drive.google.com/drive/folders/16iOl2-6-1KQT452Srg-YBIjFmWkXCQWn"},
+]},
+{name:"الدوائر القابلة للبرمجة", links:[
+  {label:"كتاب المادة", url:"https://drive.google.com/file/d/1GlhsqNOzbFccm8Xi7tk8HOSq_lPP2nUc/view"},
+  {label:"مادة الميد", url:"https://drive.google.com/file/d/1E9PMUdbIkoOj0OO3gINS0NMXOhOr23cN/view?usp=drivesdk"},
+  {label:"نوت", url:"https://drive.google.com/drive/folders/1GytYDUAViogwjm18Jk2aSWcC7ajgK2lU"},
+  {label:"نوتات إضافية", url:"https://drive.google.com/drive/folders/1JuLyjCzLlgY0yScOiMRSIM_fsF5pIh-e?usp=drive_link"},
+  {label:"سنوات", url:"https://drive.google.com/file/d/1pG8H4SkB6M7ymSchxl2T_0HAPhjdmMqa/view?usp=drivesdk"},
+]},
+{name:"لاب الدوائر القابلة للبرمجة", links:[
+  {label:"التجارب", url:"https://drive.google.com/drive/folders/1qYrfKZpGLsb-46SPhAWrU7I7hSjrOUE_?usp=drive_link"},
+  {label:"سنوات 1", url:"https://drive.google.com/file/d/1iXhVJLOzc1KN46Hk8Udo5caHL06yZO-V/view?usp=drivesdk"},
+  {label:"ميد صيفي 2025", url:"https://drive.google.com/file/d/1Ci5k69RLmGGMXYoASip9aHjDZrGI84hu/view?usp=drivesdk"},
+  {label:"سنوات 2", url:"https://drive.google.com/file/d/14RDM9u9gEWHSw_SaEDsQIcBZ04tV5HeU/view?usp=drivesdk"},
+]},
+{name:"الإشارات والنظم الطبية", links:[
+  {label:"شرح", url:"https://t.me/+Sf_dkPcjYy0yZmQ0"},
+  {label:"سيجنال — تسجيلات", url:"https://t.me/engayamohamad"},
+  {label:"شرح م. نوران عليان (pdf)", url:"https://drive.google.com/file/d/1rkbfkAltJe-vISwXCIjEq9xwAN8eTQF_/view?usp=drivesdk"},
+  {label:"سنوات 1", url:"https://drive.google.com/drive/folders/1WcQYOfUJmIIFP67CG_dd4xuBqC3GBoWA"},
+  {label:"سنوات 2", url:"https://t.me/+VaWYjyIyGeE0MWU0"},
+  {label:"سنوات 3", url:"https://t.me/+2aCkP3obTQozNDk0"},
+]},
+{name:"معالجة الإشارات الطبية", links:[
+  {label:"شرح", url:"https://drive.google.com/drive/folders/1iplxfQ1qafGyDXtR8Nuox8GP26QW09gW"},
+  {label:"سنوات", url:"https://drive.google.com/file/d/19hHx-JKfNvOCGimBcD8GJr-lvr__Y-Pn/view?usp=drivesdk"},
+  {label:"ميد", url:"https://drive.google.com/file/d/1LbRO0kxykFla-tgFE3tkmHmgBduRjchG/view?usp=drivesdk"},
+  {label:"فاينل", url:"https://drive.google.com/file/d/1r85x2kHe4hWEvzrscWNeQQA0GEXp7EXF/view?usp=drivesdk"},
+  {label:"سنوات (شاشات)", url:"https://drive.google.com/file/d/1SVNvC72pnhYeJlaV0Su1wgBHEsWLH5h1/view?usp=drivesdk"},
+  {label:"سنوات (ورقي)", url:"https://drive.google.com/file/d/1jNrnv4lZsdw9MfVPwHgF2ZHJgohlRmPq/view?usp=drivesdk"},
+]},
+{name:"مختبر معالجة الإشارات", links:[
+  {label:"شرح وسنوات", url:"https://drive.google.com/drive/mobile/folders/1iplxfQ1qafGyDXtR8Nuox8GP26QW09gW/1lz3P1_M05N7NGSkTu64Ll269aTu5-n_s?sort=13&direction=a"},
+]},
+{name:"الذكاء الاصطناعي", links:[
+  {label:"شرح", url:"https://youtube.com/playlist?list=PLKY92lED6ExlL6Ysau8pJ_pK38-3AeCZ6&si=eV4CF7EILKjtaNGn"},
+  {label:"سلايدات 1", url:"https://drive.google.com/file/d/1vxyduCXxBIKL6e_kFHiVNiux0mi_z4Hp/view?usp=drivesdk"},
+  {label:"سلايدات 2", url:"https://drive.google.com/file/d/1E7HEHfic_CTyIhQ6y7jfTbGrOX9GO0zK/view?usp=drivesdk"},
+  {label:"سلايدات 3", url:"https://drive.google.com/file/d/1BDWY6xhZhqX_NsUbkghLzr5mg8F0sbs3/view?usp=drivesdk"},
+  {label:"سلايدات 4", url:"https://drive.google.com/file/d/1WwB3XLokx1bzW3fO9_2R3hvKoqucyrvd/view?usp=drivesdk"},
+  {label:"سلايدات 5", url:"https://drive.google.com/file/d/1JMvsKjefcOMGM3w_YWFmnznhshV69bBJ/view?usp=drivesdk"},
+  {label:"سلايدات 6", url:"https://drive.google.com/file/d/1aaynxBkAZ-faHyd75oKr3yEeNMH9v9Xh/view?usp=drivesdk"},
+  {label:"سلايدات 7", url:"https://drive.google.com/file/d/1BE6UIvQPLexMGAjfEVLzzq-2K_wUw6sW/view?usp=drivesdk"},
+  {label:"سلايدات 8", url:"https://drive.google.com/file/d/1nZCtMpbFt6X5qrpanvkgvNg4sbI3_QPP/view?usp=drivesdk"},
+  {label:"سلايدات 9", url:"https://drive.google.com/file/d/1ClK_uXkkws1i-cFtsoJLN8oe-sE_JBoM/view?usp=drivesdk"},
+  {label:"سلايدات 10", url:"https://drive.google.com/file/d/1c8MMvbM3yUhg8wz0DtQw_f8meiNJ2pKv/view?usp=drivesdk"},
+  {label:"سلايدات 11", url:"https://drive.google.com/file/d/17NYgv4LThjQXCV2Qj-_8LdVF004vTwVs/view?usp=drivesdk"},
+  {label:"سلايدات 12", url:"https://drive.google.com/file/d/1cx76k-OIV6S5YikJa1jMqx_Wrepa8IqM/view?usp=drivesdk"},
+  {label:"سلايدات 13", url:"https://drive.google.com/file/d/15189Q5HOwgu-rvDbx7T3tAmZPr2TGfkC/view?usp=drivesdk"},
+  {label:"سلايدات 14", url:"https://drive.google.com/file/d/13EViVp8KKesTcX8LlXJ1XY07zzxJclcj/view?usp=drivesdk"},
+  {label:"سلايدات 15", url:"https://drive.google.com/file/d/1iJTxHD_0KHC6WFT6Xy1jsuT5yJw8sL5T/view?usp=drivesdk"},
+  {label:"سلايدات 16", url:"https://drive.google.com/file/d/163I_hOBpIMLS0Dd_kjxvyFScc9qQT-8N/view?usp=drivesdk"},
+  {label:"سلايدات 17", url:"https://drive.google.com/file/d/1wGn4xVZ210RS30J8L-5ncm4UwipxuFXr/view?usp=drivesdk"},
+  {label:"سلايدات 18", url:"https://drive.google.com/file/d/1piIDnJSwmQSIc4fo3Ki5GF_W0gSFJ1ON/view?usp=drivesdk"},
+]},
+{name:"C++", links:[
+  {label:"شرح أويس العمري", url:"https://m.youtube.com/playlist?disable_polymer=true&list=PL1paGfIfNR-bpLUysF9DjyRr1_2hB4n4P"},
+  {label:"شرح محمد الزبيدي", url:"https://youtube.com/playlist?list=PLiOo4BcK2OEjdDeowuue2cyGs1RRq6u1E"},
+  {label:"إضافة سنوات (تيليجرام)", url:"https://t.me/mohasolution"},
+  {label:"سنوات 1", url:"https://drive.google.com/drive/mobile/folders/1QMA_ZbjSAeoGeedzmS-fIpojRLiWJb4J"},
+  {label:"سنوات 2", url:"https://drive.google.com/drive/folders/1n71wpzP1Ehlf3g5TN01fOLYjOHrSf4mV"},
+  {label:"حلول التاسك", url:"https://drive.google.com/drive/folders/0B5DycLwOYrxTUjAtNHo2ckpvVEE?resourcekey=0-rriw7-XmjJveDX03COaVHA"},
+  {label:"سنوات — ميد", url:"https://drive.google.com/file/d/1zyoSQG0mZ__574zhCJrcbtYDP00dfo6G/view?usp=drivesdk"},
+  {label:"سنوات — فاينل", url:"https://drive.google.com/file/d/1ev8hH2l3ExeSRzsVfRkc0SK7yionwrnG/view?usp=drivesdk"},
+]},
+{name:"الكتابة التقنية وأخلاقيات الهندسة", links:[
+  {label:"سلايدات 1", url:"https://drive.google.com/file/d/1SDSGcL5o5JaFFSAoFak5IrST1eBC0bwM/view?usp=drivesdk"},
+  {label:"سلايدات 2", url:"https://drive.google.com/file/d/1FR5QYhtrkDIcjTQMG_Zy7WeN_aC9AcoI/view?usp=drivesdk"},
+  {label:"سلايدات 3", url:"https://drive.google.com/file/d/1zK7MRSCHeTArTXMEFNJhBppeKEh34aeB/view?usp=drivesdk"},
+  {label:"سلايدات 4", url:"https://drive.google.com/file/d/12onAOUpuJi2DkUCh8F2nsNgHydDL0L1K/view?usp=drivesdk"},
+  {label:"سلايدات 5", url:"https://drive.google.com/file/d/1onS-pdg7xUFWKGMF5yozA7YxYUTPeMTq/view?usp=drivesdk"},
+  {label:"سنوات", url:"https://drive.google.com/drive/folders/1a1YEe-wq_pIc_9Id7mtv53zGGDe5XBLp"},
+]},
+{name:"بيو SCC111", links:[
+  {label:"سنوات 1", url:"https://drive.google.com/file/d/1bNvxxSMVAixUazWgKVzo1ZyCS0wWjsYo/view?usp=drivesdk"},
+  {label:"سنوات 2", url:"https://drive.google.com/drive/mobile/folders/1Gk6akwsLNvxLeoc0PUJCyd9yReywVRZN"},
+]},
+{name:"إحصاء حيوي", links:[
+  {label:"شرح", url:"https://youtube.com/playlist?list=PLErW-FRepxDJjExJzO3trZszvkBYoAr80"},
+]},
+{name:"لاب باثو 105", links:[
+  {label:"مصادر المادة", url:"https://drive.google.com/drive/folders/1rRDqcTV2fqqhySa1jNw_q-iwd-9JCuNZ?usp=drive_link"},
+]},
+{name:"تأهيل وظيفي 1", links:[
+  {label:"كويز تأهيل وظيفي 1", url:"https://drive.google.com/file/d/1OKgsGcWFTeWJM27veNP5MqKSC2XuGTf8/view?usp=drivesdk"},
+]},
+{name:"تأهيل وظيفي 2", links:[
+  {label:"حل كويز تأهيل وظيفي 2", url:"https://drive.google.com/file/d/104TkdwAyFbGWnB9Z8EL6jaoSNCg8thxR/view?usp=drivesdk"},
+  {label:"حل أسئلة الفيديوهات", url:"https://drive.google.com/drive/mobile/folders/1TACMawIY4GSYAKqPCacKKjjWh-SHkvnN/1-mnKedObdY03ykPPtPg_9OfRHqa8kA6c?fbclid=IwY2xjawPOC5ZleHRuA2FlbQIxMQABHZV2e6mRNqFDFxf52xRb7u_6IUoRA_tj6bM6RflI1E6XAhWOqw73PIbR1Q_aem_9FoaQWs2xjb0L80OSdA4iA&sort=13&direction=a"},
+]},
+];
+
+function iconFor(label){
+  const l = label.toLowerCase();
+  if(l.includes('شرح')) return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polygon points="10,8 16,12 10,16" fill="currentColor" stroke="none"/></svg>`;
+  if(l.includes('سنوات') || l.includes('كويز') || l.includes('ميد') || l.includes('فاينل')) return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
+  if(l.includes('كتاب')) return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`;
+  if(l.includes('نوت')) return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="15" y2="17"/></svg>`;
+  if(l.includes('قوانين') || l.includes('شابتر') || l.includes('part')) return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg>`;
+  if(l.includes('تجارب') || l.includes('لاب') || l.includes('مختبر')) return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 2v6L4 20a1 1 0 0 0 1 2h14a1 1 0 0 0 1-2L15 8V2"/><line x1="9" y1="2" x2="15" y2="2"/><line x1="7" y1="15" x2="17" y2="15"/></svg>`;
+  if(l.includes('سلايد')) return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="18" x2="12" y2="21"/></svg>`;
+  if(l.includes('دوسيه')) return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>`;
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07l1.5-1.5"/></svg>`;
+}
+
+function hostOf(url){
+  try{
+    const h = new URL(url).hostname.replace('www.','');
+    return h;
+  }catch(e){ return url; }
+}
+
+const grid = document.getElementById('grid');
+let activeIndex = null;
+
+function renderGrid(filter=''){
+  grid.innerHTML = '';
+  const f = filter.trim().toLowerCase();
+  const filtered = SUBJECTS
+    .map((s,i)=>({...s, i}))
+    .filter(s => !f || s.name.toLowerCase().includes(f));
+
+  if(filtered.length === 0){
+    grid.innerHTML = `<div class="no-results">لا توجد مادة مطابقة لبحثك</div>`;
+    return;
+  }
+
+  filtered.forEach(s=>{
+    const card = document.createElement('div');
+    card.className = 'subject-card' + (s.i===activeIndex ? ' active' : '');
+    card.innerHTML = `
+      <div class="name">${s.name}</div>
+      <div class="meta"><span class="dot"></span>${s.links.length} رابط</div>
+    `;
+    card.onclick = ()=> openDetail(s.i);
+    grid.appendChild(card);
+  });
+}
+
+function openDetail(i){
+  activeIndex = i;
+  const subject = SUBJECTS[i];
+  document.getElementById('detail-title').textContent = subject.name;
+  const linksWrap = document.getElementById('detail-links');
+  linksWrap.innerHTML = subject.links.map(l => `
+    <a class="link-card" href="${l.url}" target="_blank" rel="noopener">
+      <div class="link-icon">${iconFor(l.label)}</div>
+      <div class="link-text">
+        <div class="link-label">${l.label}</div>
+        <div class="link-host">${hostOf(l.url)}</div>
+      </div>
+    </a>
+  `).join('');
+  document.getElementById('detail-wrap').classList.add('show');
+  renderGrid(document.getElementById('search').value);
+  document.getElementById('detail-wrap').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function closeDetail(){
+  activeIndex = null;
+  document.getElementById('detail-wrap').classList.remove('show');
+  renderGrid(document.getElementById('search').value);
+}
+
+document.getElementById('search').addEventListener('input', (e)=>{
+  renderGrid(e.target.value);
+});
+
+document.getElementById('stat-subjects').textContent = SUBJECTS.length;
+document.getElementById('stat-links').textContent = SUBJECTS.reduce((a,s)=>a+s.links.length,0);
+
+renderGrid();
+</script>
+</body>
+</html>
